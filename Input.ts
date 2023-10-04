@@ -23,6 +23,10 @@ export class Input {
 			c === "\ufeff"
 		)
 	}
+	get isNewLine(): boolean {
+		const c = this.current
+		return c === "\n" || c === "\r" || c === "\f" || c === "\v"
+	}
 	private constructor(
 		private readonly data: string,
 		private index = 0,
@@ -46,7 +50,7 @@ export class Input {
 		return new Input(this.data, range[0], range)
 	}
 	readUntil(needle: string | ((me: Input) => boolean)): Input {
-		return this.readWhile(typeof needle == "string" ? me => me.startsWith(needle) : needle)
+		return this.readWhile(typeof needle == "string" ? me => !me.startsWith(needle) : needle)
 	}
 	readUntilWhitespace(): Input {
 		return this.readWhile(me => !me.isWhitespace)
@@ -56,6 +60,9 @@ export class Input {
 	}
 	readIf(needle: string): boolean {
 		return !!(this.startsWith(needle) && (this.index += needle.length))
+	}
+	readLine(): Input {
+		return this.readWhile(me => !me.isNewLine)
 	}
 	split(separator: string): Input[] {
 		const result: Input[] = []
@@ -75,6 +82,12 @@ export class Input {
 	}
 	toString(): string {
 		return this.data.substring(this.index, this.range[1])
+	}
+	toInteger(): number {
+		return Number.parseInt(this.toString())
+	}
+	toFloat(): number {
+		return Number.parseFloat(this.toString())
 	}
 	static create(data: string): Input {
 		return new Input(data)

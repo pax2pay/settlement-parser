@@ -1,0 +1,1 @@
+export { testA } from "./testA"
