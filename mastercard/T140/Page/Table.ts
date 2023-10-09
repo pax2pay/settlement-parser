@@ -14,15 +14,16 @@ export namespace Table {
 	})
 	export const is = type.is
 	export function parse(lines: string[]): Table | undefined {
-		const contentStart = lines.findIndex(line => line.startsWith(" ___"))
+		const contentStart = lines.findIndex(line => line.startsWith(" ----"))
 		if (contentStart < 0)
 			return undefined
 		else {
 			const contentEnd = lines.findIndex(line => line.trim().length == 0)
 			const columns = lines[contentStart]
+				.trimStart()
 				.trimEnd()
-				.split("   ")
-				.map(c => c.length + 3)
+				.split(" ")
+				.map(c => c.length + 1)
 			function splitIntoColumns(line: string): string[] {
 				let start = 0
 				return columns.map(c => line.substring(start, (start += c)).trim())
@@ -35,8 +36,8 @@ export namespace Table {
 						.filter(c => c)
 						.join(" ")
 				),
-				content: lines.slice(contentStart + 1, contentEnd).map(splitIntoColumns),
-				footers: splitIntoColumns(lines[contentEnd + 1]),
+				content: lines.slice(contentStart + 1, contentEnd - 2).map(splitIntoColumns),
+				footers: splitIntoColumns(lines[contentEnd - 1]),
 			}
 		}
 	}

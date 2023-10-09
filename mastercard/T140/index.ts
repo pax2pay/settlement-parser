@@ -1,5 +1,5 @@
 import { ClearingCycle as T140ClearingCycle } from "./ClearingCycle"
-import { Page as T140Page } from "./Page/Header"
+import { Page as T140Page } from "./Page"
 import { Summary as T140Summary } from "./Summary"
 import { Total as T140Total } from "./Total"
 import { Type } from "./Type"
