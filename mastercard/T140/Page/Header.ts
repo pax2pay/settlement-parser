@@ -31,7 +31,17 @@ export namespace Header {
 	})
 	export const is = type.is
 
-	export function parse(input: string): Header | undefined {
+	export function parse(lines: string[]): Header | undefined {
+		const values = lines
+			.flatMap(row => row.split(" ".repeat(10)))
+			.map(h => h.toString().trim())
+			.filter(h => !!h)
+			.map(h => parseLine(h))
+			.filter(v => v && Object.keys(v).length > 0)
+		return Object.assign({}, ...values)
+	}
+
+	function parseLine(input: string): Header | undefined {
 		let result: Header | undefined
 		if (input == "" || input == "MASTERCARD WORLDWIDE")
 			result = {}

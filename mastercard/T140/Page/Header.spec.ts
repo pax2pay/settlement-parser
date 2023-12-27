@@ -19,7 +19,7 @@ describe("Header parse test", () => {
 `)
 	it("header2", () =>
 		expect(header2).toEqual({
-			body: undefined,
+			body: [],
 			header: {
 				cycle: 2,
 				date: "2023-10-04",

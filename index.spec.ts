@@ -1,8 +1,8 @@
 import "jest"
-import * as library from "./index"
+import { parser } from "./index"
 
 describe("library", () => {
 	it("a", () => {
-		expect(library.a).toEqual(42)
+		expect(parser.mastercard.T140.parse("aaa")).toEqual(undefined)
 	})
 })
