@@ -2,10 +2,12 @@ import { isoly } from "isoly"
 import { isly } from "isly"
 import { Cycle } from "../Cycle"
 import { Level } from "../Level"
+import { Specifier } from "./Specifier"
 
 export interface Header {
+	specifier?: Specifier
 	number?: number
-	runDate?: isoly.Date
+	run?: isoly.Date
 	cycle?: Cycle
 	level?: Level
 	date?: isoly.Date
@@ -18,8 +20,9 @@ export interface Header {
 
 export namespace Header {
 	export const type = isly.object<Header>({
+		specifier: Specifier.type.optional(),
 		number: isly.number().optional(),
-		runDate: isly.fromIs("isoly.DateTime", isoly.Date.is).optional(),
+		run: isly.fromIs("isoly.DateTime", isoly.Date.is).optional(),
 		cycle: isly.fromIs("Cycle", Cycle.is).optional(),
 		level: isly.fromIs("Level", Level.is).optional(),
 		date: isly.fromIs("Date", isoly.Date.is).optional(),
@@ -61,7 +64,7 @@ export namespace Header {
 			switch (key) {
 				case "RUN DATE":
 					const runDate = value.split("/")
-					result = { runDate: `20${runDate[2]}-${runDate[0]}-${runDate[1]}` }
+					result = { run: `20${runDate[2]}-${runDate[0]}-${runDate[1]}` }
 					break
 				case "ACCEPTANCE BRAND":
 					result = { brand: value }

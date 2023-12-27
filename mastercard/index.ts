@@ -1,1 +1,1 @@
-export { T140} from "./T140"
+export { T140 } from "./T140"

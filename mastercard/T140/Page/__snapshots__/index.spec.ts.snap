@@ -2,107 +2,50 @@
 
 exports[`mastercard.T140.Page parse acknowledgement 1`] = `
 Object {
-  "body": Array [],
-  "header": Object {
-    "cycle": 3,
-    "date": "2023-12-21",
-    "member": 33400,
-    "number": 1,
-    "runDate": "2023-12-21",
-    "type": "acknowledgement",
-  },
+  "class": "acknowledgement",
+  "cycle": 3,
+  "date": "2023-12-21",
+  "member": 33400,
+  "run": "2023-12-21",
 }
 `;
 
 exports[`mastercard.T140.Page parse notification 1`] = `
 Object {
-  "body": Array [
-    Object {
-      "content": Array [
-        Array [
-          "FIRST PRES.",
-          "PURCHASE   ORIG",
-          "BB",
-          "1",
-          "0.73 DR",
-          "826-GBP",
-          "0.02 CR",
-          "826-GBP",
-        ],
-      ],
-      "footers": Array [
-        "FIRST PRES.",
-        "TOTAL",
-        "",
-        "1",
-        "0.73 DR",
-        "826-GBP",
-        "0.02 CR",
-        "826-GBP",
-      ],
-      "headers": Array [
-        "TRANS. FUNC.",
-        "PROC.CODE",
-        "IRD",
-        "COUNTS",
-        "RECON AMOUNT",
-        "RECON CURR CODE",
-        "TRANS FEE",
-        "FEE CURR CODE",
-      ],
-    },
-  ],
-  "header": Object {
-    "brand": "MCC",
-    "cycle": 3,
-    "date": "2023-12-21",
-    "file": "001/231221/00000004882/03402",
-    "level": "mbr-to-mbr agreement",
-    "member": 33400,
-    "number": 1,
-    "runDate": "2023-12-21",
-    "type": "notification",
-  },
+  "class": "notification file",
+  "cycle": 3,
+  "date": "2023-12-21",
+  "file": "001/231221/00000004882/03402",
+  "run": "2023-12-21",
 }
 `;
 
 exports[`mastercard.T140.Page parse notification 2`] = `
 Object {
-  "body": Array [
+  "class": "notification summary",
+  "content": Array [
     Object {
-      "header": Object {
-        "brand": "MCC",
-        "currency": "GBP",
-        "level": "mbr-to-mbr agreement",
-        "member": 33400,
-      },
-      "table": Object {
-        "content": Array [
-          Array [
-            "000900",
-            "001/231221/00000004882/03402",
-            "ORIG",
-            "0.73 DR",
-            "0.02 CR",
-          ],
-        ],
-        "footers": undefined,
-        "headers": Array [
-          "BUSINESS SERVICE ID",
-          "FILE ID",
-          "ORIG/ RVSL",
-          "RECON. AMOUNT",
-          "TRANSACTION FEE",
-        ],
+      "brand": "MCC",
+      "currency": "GBP",
+      "data": Array [
+        Object {
+          "amount": 0.73,
+          "direction": "original",
+          "fee": -0.02,
+          "file": "001/231221/00000004882/03402",
+          "id": 900,
+        },
+      ],
+      "level": "mbr-to-mbr agreement",
+      "member": 33400,
+      "total": Object {
+        "amount": 0.73,
+        "fee": -0.02,
       },
     },
   ],
-  "header": Object {
-    "cycle": 3,
-    "date": "2023-12-21",
-    "number": 1,
-    "runDate": "2023-12-21",
-    "type": "notification",
-  },
+  "cycle": 3,
+  "date": "2023-12-21",
+  "run": "2023-12-21",
 }
 `;
