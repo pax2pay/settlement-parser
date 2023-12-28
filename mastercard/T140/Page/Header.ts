@@ -17,23 +17,20 @@ export interface Header {
 	currency?: isoly.Currency
 	type?: "acknowledgement" | "notification"
 }
-
 export namespace Header {
 	export const type = isly.object<Header>({
 		specifier: Specifier.type.optional(),
 		number: isly.number().optional(),
 		run: isly.fromIs("isoly.DateTime", isoly.Date.is).optional(),
-		cycle: isly.fromIs("Cycle", Cycle.is).optional(),
-		level: isly.fromIs("Level", Level.is).optional(),
+		cycle: Cycle.type.optional(),
+		level: Level.type.optional(),
 		date: isly.fromIs("Date", isoly.Date.is).optional(),
-		brand: isly.string().optional().optional(),
+		brand: isly.string().optional(),
 		member: isly.number().optional(),
 		file: isly.string().optional(),
-		currency: isly.fromIs("isoly.Currency", isoly.Currency.is).optional(),
-		type: isly.union(isly.string("acknowledgement"), isly.string("notification")).optional(),
+		currency: isly.string(isoly.Currency.types).optional(),
+		type: isly.string(["acknowledgement", "notification"]).optional(),
 	})
-	export const is = type.is
-
 	export function parse(lines: string[]): Header | undefined {
 		const values = lines
 			.flatMap(row => row.split(" ".repeat(10)))
@@ -43,7 +40,6 @@ export namespace Header {
 			.filter(v => v && Object.keys(v).length > 0)
 		return Object.assign({}, ...values)
 	}
-
 	function parseLine(input: string): Header | undefined {
 		let result: Header | undefined
 		if (input == "" || input == "MASTERCARD WORLDWIDE")

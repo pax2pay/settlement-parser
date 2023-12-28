@@ -8,11 +8,10 @@ export interface Table {
 
 export namespace Table {
 	export const type = isly.object<Table>({
-		headers: isly.array(isly.string()),
-		content: isly.array(isly.array(isly.string())),
-		footers: isly.array(isly.string()),
+		headers: isly.string().array(),
+		content: isly.string().array().array(),
+		footers: isly.string().array(),
 	})
-	export const is = type.is
 	export function parse(lines: string[]): Table | undefined {
 		const contentStart = lines.findIndex(line => line.startsWith(" ----"))
 		let result: Table | undefined
@@ -25,8 +24,7 @@ export namespace Table {
 				footerEnd = -1
 			}
 			const columns = lines[contentStart]
-				.trimStart()
-				.trimEnd()
+				.trim()
 				.split(" -")
 				.map(c => c.length + 2)
 			function splitIntoColumns(line: string): string[] {

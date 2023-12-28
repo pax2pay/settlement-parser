@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */ // TODO: add type checks
 import { isoly } from "isoly"
+import { isly } from "isly"
 import { Cycle } from "../Cycle"
 import { Raw } from "./Raw"
 
@@ -10,19 +10,17 @@ export interface Acknowledgement {
 	cycle: Cycle
 	member: number
 }
-
 export namespace Acknowledgement {
+	const required = isly.object<Omit<Acknowledgement, "class">>({
+		date: isly.fromIs("Date", isoly.Date.is),
+		run: isly.fromIs("isoly.DateTime", isoly.Date.is),
+		cycle: Cycle.type,
+		member: isly.number(),
+	})
 	export function parse(data: Raw): Acknowledgement | undefined {
-		{
-			return !data.body.length
-				? {
-						class: "acknowledgement",
-						date: data.header.date!,
-						run: data.header.run!,
-						cycle: data.header.cycle!,
-						member: data.header.member!,
-				  }
-				: undefined
-		}
+		let headers: Omit<Acknowledgement, "class"> | undefined
+		return data.body.length
+			? undefined
+			: (headers = required.get(data.header)) && { class: "acknowledgement", ...headers }
 	}
 }

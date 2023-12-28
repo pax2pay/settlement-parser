@@ -4,7 +4,6 @@ import { Specifier } from "./Page/Specifier"
 export interface T140 {
 	pages: T140.Page[]
 }
-
 export namespace T140 {
 	export type Page = T140Page
 	export const Page = T140Page
@@ -12,7 +11,7 @@ export namespace T140 {
 		const type = data.substring(0, 20).trim()
 		const pages = data
 			.split(/\n[^ ]/gm)
-			.map(T140.Page.parse)
+			.map(p => T140.Page.parse(p))
 			.filter((p): p is Page => !!p)
 		return Specifier.is(type) ? { pages } : undefined
 	}

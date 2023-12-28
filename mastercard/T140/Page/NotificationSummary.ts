@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */ // TODO: add type checks
 import { isoly } from "isoly"
+import { isly } from "isly"
 import { Cycle } from "../Cycle"
 import { Level } from "../Level"
 import { Value } from "../Value"
@@ -21,44 +21,49 @@ export interface NotificationSummary {
 		total: { amount: Value; fee: Value }
 	}[]
 }
-
 export namespace NotificationSummary {
+	const summaryHeaders = isly.object<Required<Pick<Header, "date" | "run" | "cycle">>>({
+		date: isly.string(),
+		run: isly.string(),
+		cycle: Cycle.type,
+	})
+	const contentHeaders = isly.object<Required<Pick<Header, "brand" | "level" | "member" | "currency">>>({
+		brand: isly.string(),
+		level: Level.type,
+		member: isly.number(),
+		currency: isly.string(isoly.Currency.types),
+	})
 	export function parse(data: Raw): NotificationSummary | undefined {
-		{
-			const separator = data.body.findIndex(l => !l.trim())
-			const header = Header.parse(data.body.slice(0, separator))
-			const table = Table.parse(data.body.slice(separator + 1))
-			const total = table && {
-				// TODO: parse grand total
-				amount: Value.parse(table.content[0][3])!,
-				fee: Value.parse(table.content[0][4])!,
-			}
-			return (
-				header &&
-				table &&
-				total && {
-					class: "notification summary",
-					date: data.header.date!,
-					run: data.header.run!,
-					cycle: data.header.cycle!,
-					content: [
-						{
-							brand: header.brand!,
-							level: header.level!,
-							member: header.member!,
-							currency: header.currency!,
-							data: table.content.map(row => ({
-								id: Number.parseInt(row[0]),
-								file: row[1],
-								direction: row[2] == "ORIG" ? "original" : "reversal",
-								amount: Value.parse(row[3])!,
-								fee: Value.parse(row[4])!,
-							})),
-							total,
-						},
-					],
-				}
-			)
+		const summaryHeader = summaryHeaders.get(data.header)
+		const separator = data.body.findIndex(l => !l.trim())
+		const contentHeader = contentHeaders.get(Header.parse(data.body.slice(0, separator)))
+		const table = Table.parse(data.body.slice(separator + 1))
+		const total = table && {
+			// TODO: parse grand total
+			amount: Value.parse(table.content[0][3]) ?? 0,
+			fee: Value.parse(table.content[0][4]) ?? 0,
 		}
+		return (
+			summaryHeader &&
+			contentHeader &&
+			table &&
+			total && {
+				class: "notification summary",
+				...summaryHeader,
+				content: [
+					{
+						...contentHeader,
+						data: table.content.map(row => ({
+							id: Number.parseInt(row[0]),
+							file: row[1],
+							direction: row[2] == "ORIG" ? "original" : "reversal",
+							amount: Value.parse(row[3]) ?? 0,
+							fee: Value.parse(row[4]) ?? 0,
+						})),
+						total,
+					},
+				],
+			}
+		)
 	}
 }

@@ -10,8 +10,7 @@ export namespace Level {
 		"sub regional",
 		"mbr-to-mbr agreement",
 	] as const
-	export const type = isly.string<Level>([...values])
-	export const is = type.is
+	export const type = isly.string<Level>(values)
 	export function parse(data: string): Level | undefined {
 		let result: Level | undefined
 		switch (data) {
