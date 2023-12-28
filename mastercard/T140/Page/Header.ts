@@ -31,17 +31,12 @@ export namespace Header {
 		currency: isly.string(isoly.Currency.types).optional(),
 		type: isly.string(["acknowledgement", "notification"]).optional(),
 	})
-	export function parse(lines: string[]): Header | undefined {
-		const values = lines
-			.flatMap(row => row.split(" ".repeat(10)))
-			.map(h => h.toString().trim())
-			.filter(h => !!h)
-			.map(h => parseLine(h))
-			.filter(v => v && Object.keys(v).length > 0)
+	export function parse(lines: string[]): Header {
+		const values = lines.flatMap(row => row.split(" ".repeat(10)).map(h => parseLine(h.trim())))
 		return Object.assign({}, ...values)
 	}
-	function parseLine(input: string): Header | undefined {
-		let result: Header | undefined
+	function parseLine(input: string): Header {
+		let result: Header
 		if (input == "" || input == "MASTERCARD WORLDWIDE")
 			result = {}
 		else if (input.startsWith("CLEARING CYCLE"))
@@ -83,6 +78,7 @@ export namespace Header {
 					break
 				default:
 					console.log("unable to parse page header:", input)
+					result = {}
 					break
 			}
 		}
