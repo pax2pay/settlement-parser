@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mastercard.T140.Page parse acknowledgement 1`] = `
-Object {
+{
   "class": "acknowledgement",
   "cycle": 3,
   "date": "2023-12-21",
@@ -11,7 +11,7 @@ Object {
 `;
 
 exports[`mastercard.T140.Page parse notification 1`] = `
-Object {
+{
   "class": "notification file",
   "cycle": 3,
   "date": "2023-12-21",
@@ -21,14 +21,14 @@ Object {
 `;
 
 exports[`mastercard.T140.Page parse notification 2`] = `
-Object {
+{
   "class": "notification summary",
-  "content": Array [
-    Object {
+  "content": [
+    {
       "brand": "MCC",
       "currency": "GBP",
-      "data": Array [
-        Object {
+      "data": [
+        {
           "amount": 0.73,
           "direction": "original",
           "fee": -0.02,
@@ -38,7 +38,7 @@ Object {
       ],
       "level": "mbr-to-mbr agreement",
       "member": 33400,
-      "total": Object {
+      "total": {
         "amount": 0.73,
         "fee": -0.02,
       },

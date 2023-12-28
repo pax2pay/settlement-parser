@@ -1,30 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`T140 parse single 1`] = `
-Object {
-  "pages": Array [
-    Object {
+{
+  "pages": [
+    {
       "class": "acknowledgement",
       "cycle": 3,
       "date": "2023-12-21",
       "member": 33400,
       "run": "2023-12-21",
     },
-    Object {
+    {
       "class": "notification file",
       "cycle": 3,
       "date": "2023-12-21",
       "file": "001/231221/00000004882/03402",
       "run": "2023-12-21",
     },
-    Object {
+    {
       "class": "notification summary",
-      "content": Array [
-        Object {
+      "content": [
+        {
           "brand": "MCC",
           "currency": "GBP",
-          "data": Array [
-            Object {
+          "data": [
+            {
               "amount": 0.73,
               "direction": "original",
               "fee": -0.02,
@@ -34,7 +34,7 @@ Object {
           ],
           "level": "mbr-to-mbr agreement",
           "member": 33400,
-          "total": Object {
+          "total": {
             "amount": 0.73,
             "fee": -0.02,
           },
