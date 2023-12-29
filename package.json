@@ -1,14 +1,14 @@
 {
-	"name": "@utily/library-template",
+	"name": "@pax2pay/settlement-parser",
 	"version": "0.0.17",
-	"description": "Template library for Typescript.",
-	"author": "Utily Contributors",
+	"description": "Library for parsing settlement files.",
+	"author": "Pax2Pay Ltd",
 	"license": "MIT",
-	"repository": "https://github.com/utily/library-template",
+	"repository": "https://github.com/pax2pay/settlement-parser",
 	"bugs": {
-		"url": "https://github.com/utily/library-template/issues"
+		"url": "https://github.com/pax2pay/settlement-parser/issues"
 	},
-	"homepage": "https://github.com/utily",
+	"homepage": "https://pax2pay.com",
 	"private": false,
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
