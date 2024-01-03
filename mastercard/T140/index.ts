@@ -7,6 +7,11 @@ export interface T140 {
 export namespace T140 {
 	export type Page = T140Page
 	export const Page = T140Page
+	export namespace Page {
+		export type Acknowledgement = T140Page.Acknowledgement
+		export type NotificationFile = T140Page.NotificationFile
+		export type NotificationSummary = T140Page.NotificationSummary
+	}
 	export function parse(data: string): T140 | undefined {
 		const type = data.substring(0, 20).trim()
 		const pages = data
