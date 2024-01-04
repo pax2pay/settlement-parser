@@ -1,10 +1,10 @@
 import { Acknowledgement as PageAcknowledgement } from "./Acknowledgement"
-import { Failed } from "./Failed"
+import { Failed as PageFailed } from "./Failed"
 import { Header } from "./Header"
 import { NotificationFile as PageNotificationFile } from "./NotificationFile"
 import { NotificationSummary as PageNotificationSummary } from "./NotificationSummary"
 
-export type Page = PageAcknowledgement | PageNotificationFile | PageNotificationSummary | Failed
+export type Page = PageAcknowledgement | PageNotificationFile | PageNotificationSummary | Page.Failed
 
 export namespace Page {
 	export function parse(input: string): Page | undefined {
@@ -20,6 +20,11 @@ export namespace Page {
 					PageNotificationSummary.parse(raw) || { class: "failed", data: input }
 	}
 	export type Acknowledgement = PageAcknowledgement
+	export const Acknowledgement = PageAcknowledgement
 	export type NotificationFile = PageNotificationFile
+	export const NotificationFile = PageNotificationFile
 	export type NotificationSummary = PageNotificationSummary
+	export const NotificationSummary = PageNotificationSummary
+	export type Failed = PageFailed
+	export const Failed = PageFailed
 }
