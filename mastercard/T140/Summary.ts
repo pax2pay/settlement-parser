@@ -7,7 +7,7 @@ export interface Summary {
 	date?: isoly.Date
 	run?: isoly.Date
 	cycle?: Cycle
-	total?: { amount: Partial<Record<isoly.Currency, number>>; fee: Partial<Record<isoly.Currency, number>> }
+	total?: Partial<Record<isoly.Currency, { expected: { net: number; fee: { other: number } } }>>
 }
 
 export namespace Summary {
@@ -25,20 +25,22 @@ export namespace Summary {
 		}
 		return file ? { ...result, file } : result
 	}
-	function add(total: Summary["total"], content: Page.NotificationSummary["content"]): Summary["total"] {
-		return content.reduce(
-			(r, e) => ({
-				...r,
-				amount: {
-					...r?.amount,
-					[e.currency]: isoly.Currency.add(e.currency, r?.amount?.[e.currency] ?? 0, e.total.amount),
+	function add(total: Summary["total"], contents: Page.NotificationSummary["content"]): Summary["total"] {
+		const result: Summary["total"] = {}
+		for (const content of contents) {
+			result[content.currency] = {
+				expected: {
+					net: isoly.Currency.add(content.currency, content.total.amount, total?.[content.currency]?.expected.net ?? 0),
+					fee: {
+						other: isoly.Currency.add(
+							content.currency,
+							-content.total.fee,
+							total?.[content.currency]?.expected.fee.other ?? 0
+						),
+					},
 				},
-				fee: {
-					...r?.fee,
-					[e.currency]: isoly.Currency.add(e.currency, r?.fee[e.currency] ?? 0, -e.total.fee),
-				},
-			}),
-			total
-		)
+			}
+		}
+		return result
 	}
 }
