@@ -30,12 +30,12 @@ export namespace Summary {
 		for (const content of contents) {
 			result[content.currency] = {
 				expected: {
-					net: isoly.Currency.add(content.currency, content.total.amount, total?.[content.currency]?.expected.net ?? 0),
+					net: isoly.Currency.add(content.currency, total?.[content.currency]?.expected.net ?? 0, content.total.amount),
 					fee: {
-						other: isoly.Currency.add(
+						other: isoly.Currency.subtract(
 							content.currency,
-							-content.total.fee,
-							total?.[content.currency]?.expected.fee.other ?? 0
+							total?.[content.currency]?.expected.fee.other ?? 0,
+							content.total.fee
 						),
 					},
 				},
