@@ -1,6 +1,6 @@
 {
 	"name": "@pax2pay/settlement-parser",
-	"version": "0.0.22",
+	"version": "0.0.23",
 	"description": "Library for parsing settlement files.",
 	"author": "Pax2Pay Ltd",
 	"license": "MIT",
