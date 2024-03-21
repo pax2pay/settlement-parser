@@ -25,9 +25,9 @@ exports[`T140 parse single 1`] = `
           "currency": "GBP",
           "data": [
             {
-              "amount": 0.73,
+              "amount": 1100.66,
               "direction": "original",
-              "fee": -0.02,
+              "fee": -22.46,
               "file": "001/231221/00000004882/03402",
               "id": 900,
             },
@@ -35,8 +35,8 @@ exports[`T140 parse single 1`] = `
           "level": "mbr-to-mbr agreement",
           "member": 33400,
           "total": {
-            "amount": 0.73,
-            "fee": -0.02,
+            "amount": 1100.66,
+            "fee": -22.46,
           },
         },
       ],

@@ -14,13 +14,13 @@ export const single = `1IP727010-AA                                           MA
                                                                          CURR                         CURR                           
  TRANS. FUNC. PROC.CODE       IRD   COUNTS               RECON AMOUNT    CODE       TRANS FEE         CODE                           
  ------------ --------------- --- -------- -------------------------- ------- ----------------------- -------                        
- FIRST PRES.  PURCHASE   ORIG BB         1                    0.73 DR 826-GBP                 0.02 CR 826-GBP                        
+ FIRST PRES.  PURCHASE   ORIG BB         1                1,100.66 DR 826-GBP                22.46 CR 826-GBP                        
  ------------ --------------- --- -------- -------------------------- ------- ----------------------- -------                        
- FIRST PRES.  TOTAL                      1                    0.73 DR 826-GBP                 0.02 CR 826-GBP                        
+ FIRST PRES.  TOTAL                      1                1,100.66 DR 826-GBP                22.46 CR 826-GBP                        
                                                                                                                                      
  MBR-TO-MBR AGREEMENT                                                                                                                
  MASTERCARD SETTLED                                                                                                                  
- BUSINESS SERVICE ID SUBTOTAL            1                    0.73 DR 826-GBP                 0.02 CR 826-GBP                        
+ BUSINESS SERVICE ID SUBTOTAL            1                1,100.66 DR 826-GBP                22.46 CR 826-GBP                        
 1IP727020-AA                                           MASTERCARD WORLDWIDE                                       RUN DATE: 12/21/23 
                                                 CLEARING CYCLE 003 - NOTIFICATION                                 PAGE NO:         1 
                                                               2023-12-21                                                             
@@ -34,8 +34,8 @@ export const single = `1IP727010-AA                                           MA
  SERVICE                               ORIG/                                                                                         
      ID            FILE ID             RVSL          RECON. AMOUNT                   TRANSACTION FEE                                 
  -------- ---------------------------- ----        -------------------              -------------------                              
- 000900   001/231221/00000004882/03402 ORIG                     0.73 DR                         0.02 CR                              
+ 000900   001/231221/00000004882/03402 ORIG                 1,100.66 DR                        22.46 CR                              
                                                                                                                                      
-                             GRAND TOTAL                        0.73 DR                         0.02 CR                              
+                             GRAND TOTAL                    1,100.66 DR                        22.46 CR                              
                                                                                                                                      
 `
