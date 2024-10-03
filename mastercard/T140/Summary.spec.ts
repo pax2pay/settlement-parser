@@ -8,7 +8,7 @@ describe("mastercard.T140.Summary", () => {
 			date: "2023-12-21",
 			file: "001/231221/00000004882/03402",
 			run: "2023-12-21",
-			total: { GBP: { expected: { net: 0.73, fee: { other: 0.02 } } } },
+			total: { GBP: { expected: { net: 0.73, charge: 0, fee: { other: 0.02 } } } },
 		})
 	})
 	it("parse single", () => {
