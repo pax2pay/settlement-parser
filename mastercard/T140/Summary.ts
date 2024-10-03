@@ -7,7 +7,7 @@ export interface Summary {
 	date?: isoly.Date
 	run?: isoly.Date
 	cycle?: Cycle
-	total?: Partial<Record<isoly.Currency, { expected: { net: number; fee: { other: number } } }>>
+	total?: Partial<Record<isoly.Currency, { expected: { net: number; charge: number; fee: { other: number } } }>>
 }
 
 export namespace Summary {
@@ -30,6 +30,7 @@ export namespace Summary {
 		for (const content of contents) {
 			result[content.currency] = {
 				expected: {
+					charge: 0,
 					net: isoly.Currency.add(content.currency, total?.[content.currency]?.expected.net ?? 0, content.total.amount),
 					fee: {
 						other: isoly.Currency.subtract(
